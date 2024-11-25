@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="clr_000000">#000000</color>
+    <color name="clr_BF000000">#BF000000</color>
+    <color name="clr_333333">#333333</color>
+    <color name="clr_666666">#666666</color>
+    <color name="clr_BF666666">#BF666666</color>
+    <color name="clr_676767">#676767</color>
+    <color name="clr_999999">#999999</color>
+    <color name="clr_A8A8A8">#A8A8A8</color>
+    <color name="clr_CCCCCC">#CCCCCC</color>
+    <color name="clr_D3D3D3">#D3D3D3</color>
+    <color name="clr_DDDDDD">#DDDDDD</color>
+    <color name="clr_EDEDED">#EDEDED</color>
+    <color name="clr_E7E7E7">#E7E7E7</color>
+    <color name="clr_F5F5F5">#F5F5F5</color>
+    <color name="clr_F8F8F8">#F8F8F8</color>
+    <color name="clr_FFFFFF">#FFFFFF</color>
+    <color name="clr_80FFFFFF">#80FFFFFF</color>
+    <color name="clr_26000000">#26000000</color>
+    <color name="clr_45000000">#45000000</color>
+
+    <color name="clr_71A146">#71A146</color>
+    <color name="clr_8071A146">#8071A146</color>
+    <color name="clr_8EC9F3">#8EC9F3</color>
+    <color name="clr_808EC9F3">#808EC9F3</color>
+    <color name="clr_F4B939">#F4B939</color>
+    <color name="clr_EE8333">#EE8333</color>
+    <color name="clr_80EE8333">#80EE8333</color>
+
+    <color name="clr_261D7FFF">#261D7FFF</color>
+    <color name="clr_991D7FFF">#991D7FFF</color>
+    <color name="clr_223EDE">#223EDE</color>
+    <color name="clr_80103EDF">#80103EDF</color>
+    <color name="clr_103EDF">#103EDF</color>
+    <color name="clr_F33841">#F33841</color>
+    <color name="clr_99FF005C">#99FF005C</color>
+
+    <color name="clr_bg">@color/clr_FFFFFF</color>
+    <color name="clr_txt">@color/clr_000000</color>
+    <color name="clr_hint">@color/clr_A8A8A8</color>
+    <color name="clr_error">@color/clr_F33841</color>
+    <color name="clr_low">@color/clr_71A146</color>
+    <color name="clr_avg">@color/clr_8EC9F3</color>
+    <color name="clr_high">@color/clr_F4B939</color>
+    <color name="clr_very_high">@color/clr_EE8333</color>
+
+    <color name="clr_str_unfocused">@color/clr_DDDDDD</color>
+    <color name="clr_str_focused">@color/clr_223EDE</color>
+
+    <color name="clr_chart_label">@color/clr_666666</color>
+    <color name="clr_chart_line">@color/clr_EDEDED</color>
+</resources>
