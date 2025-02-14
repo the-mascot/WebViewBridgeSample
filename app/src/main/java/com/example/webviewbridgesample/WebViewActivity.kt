@@ -1,6 +1,5 @@
 package com.example.webviewbridgesample
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -8,8 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment.getExternalStorageDirectory
-import android.provider.MediaStore
+import android.util.Base64
 import android.webkit.JavascriptInterface
 import android.webkit.PermissionRequest
 import android.webkit.ValueCallback
@@ -18,18 +16,13 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
-import com.example.webviewbridgesample.databinding.ActivityMainBinding
 import com.example.webviewbridgesample.databinding.ActivityWebViewBinding
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
+import org.json.JSONObject
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 class WebViewActivity : AppCompatActivity() {
 
@@ -80,25 +73,54 @@ class WebViewActivity : AppCompatActivity() {
             settings.userAgentString = "app" // 웹에서 해당 속성을 통해 앱에서 띄운 웹뷰로 인지 할 수 있도록 합니다.
             settings.defaultTextEncodingName = "UTF-8" // 인코딩 설정
             settings.databaseEnabled = true //Database Storage API 사용 여부 설정
+            settings.setMediaPlaybackRequiresUserGesture(false) // 비디오 자동 재생 허용
         }
         binding.webView.webViewClient = CustomWebViewClient()
         binding.webView.webChromeClient = CustomWebChromeClient(activity = this)
-        binding.webView.loadUrl("https://qariv.hanwhalife.com/")
+        val accessToken: String = "BrlespcIXYlGb9DsLu020qTXPOMJpeg7zSlhPvoIpb/xvF7pjimLcxJ7PYe9PnVfItBXK6/XLcqQGwu/7ttJ3sPiaaZklCCRW5DFwsDcJ4hMmKzyAxsr64/Hv7EIcVqKl9XMEesGqVzBCCkuG9y95fiTw+zYyPxHwVEUCfJHG0cDmWbTzUJ1C7JtW+ocPsXv6mJfLBTbq4cFxKjWyjAzJKOQFo+2mdu5dK0GVk0I6PqOkBbC1m5zYe9RvVsZ+n160Phw+cZNgmmqTHAP56l1I/a6S+JJxMZMdnIXmM6wcz6OSD2blCZWdaCfAd+SXPuDgpO2wyZKtWPj9ubPxpO/SHmBBaDkCCouCIDxdKdepwSvdytK9C1NeOZBzyuhhKIq"
+        val rivsRqstId: String = "RIVSHCIWV1NE34DVR0U20250214111016"
+        val rivURL = Uri.Builder()
+            .scheme("https")
+            .authority("qariv.hanwhalife.com")
+            .appendQueryParameter("authorization", accessToken)
+            .appendQueryParameter("rivsRqstId", rivsRqstId)
+            .build()
+        binding.webView.loadUrl(rivURL.toString());
+        binding.webView.addJavascriptInterface(WebAppInterface(), "AndroidBridge")
     }
 
     inner class WebAppInterface {
+        private var result = "N";
+
+        private fun decodeMessage(encodedMessage: String): JSONObject {
+            val subMessage = encodedMessage.substringAfter("native://callNative?")
+            val decodedBytes = Base64.decode(subMessage, Base64.DEFAULT)
+            val decodedString = String(decodedBytes, StandardCharsets.UTF_8)
+            val message = URLDecoder.decode(decodedString, StandardCharsets.UTF_8.toString())
+
+            return JSONObject(message)
+        }
+
         @JavascriptInterface
-        fun sendResults(code: String) {
+        fun callNativeMethod(encodedMessage: String) {
             runOnUiThread {
-                finish()
-                if (code == "0000") {
-                    println("인증 성공")
-                } else {
-                    println("인증 실패")
+                try {
+                    val message: JSONObject = decodeMessage(encodedMessage)
+
+                    val command: String = message.getString("command")
+                    val args: JSONObject = message.getJSONObject("args")
+                    val callbackScriptName: String? = message.getString("callbackScriptName");
+
+                    if (command == "saveData") {
+                        if (args.getString("value") == "JUMIN" || args.getString("value") == "DRIVER") {
+                            result = "Y"
+                        }
+                    } else if (command == "webClose") {
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace();
                 }
-                val intent = Intent(this@WebViewActivity, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                startActivity(intent)
             }
         }
 
@@ -174,22 +196,16 @@ class WebViewActivity : AppCompatActivity() {
         override fun doUpdateVisitedHistory(view: WebView?, url: String?, isReload: Boolean) {
             super.doUpdateVisitedHistory(view, url, isReload)
         }
-
     }
 
     class CustomWebChromeClient(val activity: AppCompatActivity) : WebChromeClient() {
         override fun onPermissionRequest(request: PermissionRequest?) {
             val permission = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.CAMERA)
             if (permission == PackageManager.PERMISSION_GRANTED) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    if (request != null) {
-                        request.grant(request.resources)
-                    }
-                }
+                request?.grant(request.resources)
             } else {
                 ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.CAMERA), 99)
             }
         }
     }
-
 }
