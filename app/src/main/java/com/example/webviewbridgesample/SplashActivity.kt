@@ -52,15 +52,21 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    // 권한이 없을 때도 MainActivity로 이동 (권한 요청은 MainActivity에서 처리)
     private fun moveToPermission() {
         Intent(this, MainActivity::class.java).apply {
+            putExtra("REQUIRE_PERMISSION", true)
             startActivity(this)
             finish()
         }
     }
 
+    // 모든 권한이 있을 때 MainActivity로 이동
     private fun moveToMain() {
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+        Intent(this, MainActivity::class.java).apply {
+            putExtra("REQUIRE_PERMISSION", false)
+            startActivity(this)
+            finish()
+        }
     }
 }

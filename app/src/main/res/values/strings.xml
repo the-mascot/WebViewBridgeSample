@@ -3,4 +3,12 @@
     <string name="label_bswr_dvsn_code">업무구분코드</string>
     <string name="label_rivs_cust_id">고객식별ID</string>
     <string name="label_api_method">API Method</string>
+    <string name="label_dept_code">요청부서코드</string>
+    <string name="label_key_in_count">KeyIn 카운트</string>
+    <string-array name="env_options">
+        <item>QA</item>
+        <item>PROD</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

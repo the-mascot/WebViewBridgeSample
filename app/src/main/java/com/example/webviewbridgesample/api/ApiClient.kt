@@ -1,5 +1,6 @@
 package com.example.webviewbridgesample.api
 
+import com.example.webviewbridgesample.constants.CommonConstants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -7,8 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-    private const val BASE_URL = "https://qariv.hanwhalife.com/"
-
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
@@ -19,9 +18,16 @@ object ApiClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .build()
 
-    val instance: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create()) // ✅ Gson 사용
-        .client(client)
-        .build()
+    fun getInstance(env: String): Retrofit {
+        val baseUrl = when (env) {
+            "prod" -> CommonConstants.PROD_URL  // 실제 운영 URL
+            else -> CommonConstants.QA_URL      // 기본 QA URL
+        }
+
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
 }
