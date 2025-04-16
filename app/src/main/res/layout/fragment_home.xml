@@ -4,28 +4,42 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:padding="36dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:clickable="true"
-        tools:context=".ui.home.HomeFragment"
-        tools:layout_editor_absoluteY="-46dp"
-        tools:layout_editor_absoluteX="-47dp">
+        tools:context=".ui.home.HomeFragment">
+
+    <!-- ENV -->
+    <TextView
+            android:id="@+id/labelEnv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_env"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
             android:id="@+id/spinEnv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="131dp"
-            android:layout_marginBottom="25dp"
-            android:minHeight="48dp"
-            android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown"
+            android:background="@android:drawable/btn_dropdown"
             android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/etBswrDvsnCode"
-            app:layout_constraintBottom_toTopOf="@+id/etBswrDvsnCode"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/etBswrDvsnCode" />
+            app:layout_constraintTop_toBottomOf="@id/labelEnv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <!-- BswrDvsnCode -->
+    <TextView
+            android:id="@+id/labelBswrDvsnCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_bswr_dvsn_code"
+            app:layout_constraintTop_toBottomOf="@id/spinEnv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:id="@+id/etBswrDvsnCode"
@@ -34,11 +48,20 @@
             android:inputType="text"
             android:text="RIV"
             android:hint="@string/label_bswr_dvsn_code"
-            app:layout_constraintTop_toBottomOf="@+id/spinEnv"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintEnd_toEndOf="@+id/etRivsCustIdnrId"
-            app:layout_constraintBottom_toTopOf="@+id/etRivsCustIdnrId"
-            app:layout_constraintStart_toStartOf="@+id/etRivsCustIdnrId" />
+            app:layout_constraintTop_toBottomOf="@id/labelBswrDvsnCode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <!-- RivsCustIdnrId -->
+    <TextView
+            android:id="@+id/labelRivsCustId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_rivs_cust_id"
+            app:layout_constraintTop_toBottomOf="@id/etBswrDvsnCode"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:id="@+id/etRivsCustIdnrId"
@@ -47,11 +70,20 @@
             android:inputType="text"
             android:text="1022573"
             android:hint="@string/label_rivs_cust_id"
-            app:layout_constraintTop_toBottomOf="@+id/etBswrDvsnCode"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintEnd_toEndOf="@+id/etRivsApiMthoId"
-            app:layout_constraintBottom_toTopOf="@+id/etRivsApiMthoId"
-            app:layout_constraintStart_toStartOf="@+id/etRivsApiMthoId" />
+            app:layout_constraintTop_toBottomOf="@id/labelRivsCustId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <!-- ApiMethod -->
+    <TextView
+            android:id="@+id/labelRivsApiMthoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_api_method"
+            app:layout_constraintTop_toBottomOf="@id/etRivsCustIdnrId"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:id="@+id/etRivsApiMthoId"
@@ -60,11 +92,20 @@
             android:inputType="text"
             android:text="WEBVIEW"
             android:hint="@string/label_api_method"
-            app:layout_constraintTop_toBottomOf="@+id/etRivsCustIdnrId"
-            android:layout_marginBottom="24dp"
-            app:layout_constraintEnd_toEndOf="@+id/etRqstDeptCode"
-            app:layout_constraintBottom_toTopOf="@+id/etRqstDeptCode"
-            app:layout_constraintStart_toStartOf="@+id/etRqstDeptCode" />
+            app:layout_constraintTop_toBottomOf="@id/labelRivsApiMthoId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <!-- Dept Code -->
+    <TextView
+            android:id="@+id/labelRqstDeptCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_dept_code"
+            app:layout_constraintTop_toBottomOf="@id/etRivsApiMthoId"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:id="@+id/etRqstDeptCode"
@@ -73,11 +114,20 @@
             android:inputType="text"
             android:text="TEST"
             android:hint="@string/label_dept_code"
-            app:layout_constraintTop_toBottomOf="@+id/etRivsApiMthoId"
-            android:layout_marginBottom="26dp"
-            app:layout_constraintEnd_toEndOf="@+id/etKeyInCount"
-            app:layout_constraintBottom_toTopOf="@+id/etKeyInCount"
-            app:layout_constraintStart_toStartOf="@+id/etKeyInCount" />
+            app:layout_constraintTop_toBottomOf="@id/labelRqstDeptCode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    <!-- Key In Count -->
+    <TextView
+            android:id="@+id/labelKeyInCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_key_in_count"
+            app:layout_constraintTop_toBottomOf="@id/etRqstDeptCode"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
 
     <EditText
             android:id="@+id/etKeyInCount"
@@ -86,22 +136,20 @@
             android:inputType="number"
             android:text="3"
             android:hint="@string/label_key_in_count"
-            app:layout_constraintTop_toBottomOf="@+id/etRqstDeptCode"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@id/labelKeyInCount"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/callRivBtn"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginTop="8dp" />
 
+    <!-- Button -->
     <Button
             android:id="@+id/callRivBtn"
-            android:text="한화 비대면인증 호출"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="한화 비대면인증 호출"
             android:backgroundTint="#03A9F4"
-            app:layout_constraintTop_toBottomOf="@+id/etKeyInCount"
-            android:layout_marginBottom="134dp"
-            app:layout_constraintEnd_toEndOf="@+id/etKeyInCount"
-            app:layout_constraintStart_toStartOf="@+id/etKeyInCount"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
+            app:layout_constraintTop_toBottomOf="@id/etKeyInCount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

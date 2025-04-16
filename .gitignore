@@ -1,15 +1,63 @@
+# === Gradle ===
+.gradle/
+build/
+**/build/
+
+# === IntelliJ / Android Studio ===
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*.ipr
+*.iws
+
+# === Local Configuration Files ===
 local.properties
+.gradle/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# === OS Specific ===
+.DS_Store
+Thumbs.db
+
+# === Log / Temporary Files ===
+*.log
+*.tmp
+
+# === Kotlin / Java ===
+*.class
+*.jar
+*.war
+*.ear
+
+# === Jetpack Compose Preview Caches ===
+*.preview.cache/
+
+# === Android Specific ===
+# APKs / AABs
+*.apk
+*.ap_
+*.aab
+
+# Android Studio Generated Files
+/.gradle/
+/.idea/
+/*.iml
+/.cxx/
+/build/
+/captures/
+/outputs/
+/local.properties
+
+# === Testing / Coverage ===
+test-results/
+*.ec
+coverage/
+coverage.ec
+
+# === NDK / CMake ===
+*.so
+obj/
+
+# === Misc ===
+*.orig
